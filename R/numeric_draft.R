@@ -1,13 +1,21 @@
-#' @export
+#'Convert certain variables to numeric values
 #'
-good_date <- function(sheet){
-  var_names <- colnames(sheet)
-  var_names <- var_names[2:14]
-  enquo_var_names <- enquo(var_names)
+#' Converts (by default) 2 to last variables to numeric values. Or use the \code{...} argument to determine which cols to convert.
+#'
+#' @name to_numeric
+#' @param df Any data frame you want to edit
+#' @param ... Unquoted variable names (either comma seperated or colon separated for a range of variables)
+#' @return A data frame
+#' @export
 
-  for(n in length(var_names)) {
-    sheet$enquo_var_names[n] <- as.numeric(sheet$enquo_var_names[n])
+to_numeric <- function(df, ...) {
+  var_ls <- quos(...)
 
+  if (length(var_ls) == 0) {
+    df %>%
+      mutate_at(2:length(.), as.numeric)
+  } else {
+    df %>%
+      mutate_at(var_ls, as.numeric)
   }
-
 }
