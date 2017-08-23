@@ -25,7 +25,7 @@ inst_ann <- function(sheet, meta) {
     var <- meta %>% filter(Variable == n)
     print(var$Dat.Typ)
 
-    if(as.character(var$Dat.Typ) == "FLOW" & as.character(var$Fre) == "Quarter" &
+    if(as.character(var$Data.Type) == "FLOW" & as.character(var$Frequency) == "Quarter" &
        str_detect(as.character(var$Variable), "Cha.Ove.Pre.Yea") == FALSE){
       sheet <-sheet %>%
         quarter_mutate(n)

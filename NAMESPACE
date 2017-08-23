@@ -3,5 +3,7 @@
 export(cut_meta)
 export(good_date)
 export(good_names)
+export(inst_ann)
+export(nom_units)
 export(stash_meta)
 export(to_numeric)
