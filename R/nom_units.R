@@ -20,14 +20,14 @@ nom_units <- function(sheet, meta) {
   for(n in names) {
     print(n)
     var <- meta %>% filter(Variable == n)
-    print(var$Unit)
+    print(var$Uni)
 
-    if(var$Unit == "000"){
+    if(var$Uni == "000"){
       sheet <-sheet %>%
         mutate_at(n, thousand)
     }
 
-    if(var$Unit == "Percent"){
+    if(var$Uni == "Percent"){
       sheet <- sheet %>%
         mutate_at(n, percent)
 
