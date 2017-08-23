@@ -6,9 +6,18 @@ inst_ann <- function(sheet, meta) {
     select(-1) %>%
     colnames()
 
-  quarterly <- function(x){
-    new <- x*4
-    new
+  # quarterly <- function(x){
+  #   new <- x*4
+  #   new
+  # }
+
+  quarter_mutate <- function(sheet, expr) {
+    expr <- rlang::parse_quosure(expr)
+    inst_ann_name <- paste0( quo_name(expr), ".Ins.Ann")
+
+    mutate(sheet,
+           !!inst_ann_name := 4*(!!expr)
+    )
   }
 
   for(n in names) {
@@ -16,14 +25,15 @@ inst_ann <- function(sheet, meta) {
     var <- meta %>% filter(Variable == n)
     print(var$Dat.Typ)
 
-    if(as.character(var$Dat.Typ) == "FLOW" ){
-      newsheet <-sheet %>%
-        mutate_at(n, quarterly)
+    if(as.character(var$Dat.Typ) == "FLOW" & as.character(var$Fre) == "Quarter" &
+       str_detect(as.character(var$Variable), "Cha.Ove.Pre.Yea") == FALSE){
+      sheet <-sheet %>%
+        quarter_mutate(n)
     }
 
 
   }
 
-  newsheet
+  sheet
 
 }
