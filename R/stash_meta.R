@@ -1,6 +1,8 @@
 #' @export
 #'
 stash_meta <- function(sheet) {
+
+  sheet <- good_names(sheet)
   meta_wide <- head(sheet, n = 9)
   colnames(meta_wide)[colnames(meta_wide)=="Date"] <- "Variable"
   Attribute <- meta_wide$Variable %>%
@@ -13,6 +15,5 @@ stash_meta <- function(sheet) {
   meta_long <- rownames_to_column(meta_long)
   colnames(meta_long)[1] <- "Variable"
   meta_long
-
 
 }
