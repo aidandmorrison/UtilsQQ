@@ -6,6 +6,8 @@ inst_ann <- function(sheet, meta) {
     select(-1) %>%
     colnames()
 
+  names <- names[!str_detect(names, "Pre.12m")]
+
   # quarterly <- function(x){
   #   new <- x*4
   #   new
@@ -52,3 +54,5 @@ inst_ann <- function(sheet, meta) {
   sheet
 
 }
+
+
