@@ -12,6 +12,7 @@ good_names <- function(sheet = sheet, meta = FALSE) {
     str_replace_all("\\(", "-") %>%
     str_replace_all("\\)", "-") %>%
     str_replace_all("-;", "-") %>%
+    str_replace_all("\\&", "-") %>%
     str_replace_all("--", "-") %>%
     str_replace_all("--", "-") %>%
     str_replace_all("--", "-") %>%
